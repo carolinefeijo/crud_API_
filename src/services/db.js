@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-let crud = "crud";
+let crud = "usersCrud";
 
 mongoose.connect(`mongodb+srv://saberdigital:saberdigital@saber-digital-db.bbpgwpb.mongodb.net/${crud}`, { useNewUrlParser: true, useUnifiedTopology: true },
 

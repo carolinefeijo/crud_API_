@@ -8,7 +8,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use('/assets', express.static(__dirname + '/assets'))
 
-require('./src/controllers/RecipeController')(app);
+require('./src/controllers/UserController')(app);
 
 
 app.listen(port, () => {
