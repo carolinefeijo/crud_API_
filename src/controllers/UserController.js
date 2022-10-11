@@ -3,11 +3,11 @@ const router = express.Router();
 
 const User = require('../models/UserModel')
 
-// Register new recipe
-router.post('/create', async(req, res) => {
+// Registrar usuario
+router.post('/create', async (req, res) => {
     try {
         const { body } = req;
-
+        console.log(body)
         if (body != null) {
             const userData = await User.create(body);
 
@@ -26,7 +26,8 @@ router.post('/create', async(req, res) => {
     }
 })
 
-router.get('/list', async(req, res) => {
+// Listar todos os usúarios
+router.get('/list', async (req, res) => {
     try {
 
         const usersDb = await User.find()
@@ -43,7 +44,8 @@ router.get('/list', async(req, res) => {
     }
 })
 
-router.delete('/delete', async(req, res) => {
+// Deletar usúario
+router.delete('/delete', async (req, res) => {
     try {
 
         const { id } = req.query;
@@ -64,7 +66,8 @@ router.delete('/delete', async(req, res) => {
     }
 })
 
-router.put('/update', async(req, res) => {
+// Atualizar ou ler todos os usúarios
+router.put('/update', async (req, res) => {
     try {
         const { query, body } = req
 
@@ -75,6 +78,25 @@ router.put('/update', async(req, res) => {
         } else {
             return res.status(401).send({ message: "necessario enviar todos os parametros" });
         }
+    } catch {
+        return res.status(400).send({ message: "error server" });
+    }
+})
+
+//LISTA APENAS 1 USUARIO
+router.get('/list/user', async (req, res) => {
+
+    const { id } = req.query;
+    try {
+        console.log(id)
+        const userDb = await User.findById(id)
+
+        if (userDb != null) {
+            return res.status(200).send(userDb);
+        } else {
+            return res.status(401).send({ message: "error ao editar usuário" });
+        }
+
     } catch {
         return res.status(400).send({ message: "error server" });
     }
