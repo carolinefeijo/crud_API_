@@ -84,9 +84,9 @@ router.put('/update', async (req, res) => {
 })
 
 //LISTA APENAS 1 USUARIO
-router.get('/list/user', async (req, res) => {
+router.get('/find', async (req, res) => {
 
-    const { id } = req.query;
+    const  id = req;
     try {
         console.log(id)
         const userDb = await User.findById(id)
@@ -94,7 +94,7 @@ router.get('/list/user', async (req, res) => {
         if (userDb != null) {
             return res.status(200).send(userDb);
         } else {
-            return res.status(401).send({ message: "error ao editar usuário" });
+            return res.status(401).send({ message: "error ao encontrar id" });
         }
 
     } catch {
