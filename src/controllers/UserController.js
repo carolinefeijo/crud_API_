@@ -4,7 +4,7 @@ const router = express.Router();
 const User = require('../models/UserModel')
 
 // Registrar usuario
-router.post('/create', async (req, res) => {
+router.post('/create', async(req, res) => {
     try {
         const { body } = req;
         console.log(body)
@@ -27,7 +27,7 @@ router.post('/create', async (req, res) => {
 })
 
 // Listar todos os usúarios
-router.get('/list', async (req, res) => {
+router.get('/list', async(req, res) => {
     try {
 
         const usersDb = await User.find()
@@ -45,9 +45,9 @@ router.get('/list', async (req, res) => {
 })
 
 // Deletar usúario
-router.delete('/delete', async (req, res) => {
+router.delete('/delete', async(req, res) => {
     try {
-
+        console.log(req.query)
         const { id } = req.query;
 
         if (id != null) {
@@ -67,12 +67,12 @@ router.delete('/delete', async (req, res) => {
 })
 
 // Atualizar ou ler todos os usúarios
-router.put('/update', async (req, res) => {
+router.put('/update', async(req, res) => {
     try {
         const { query, body } = req
 
         if (query && body) {
-            const userDb = await User.findByIdAndUpdate(query.id, body)
+            const userDb = await User.findByIdAndUpdate(query.id, body.user)
             console.log(userDb)
 
         } else {
@@ -84,11 +84,10 @@ router.put('/update', async (req, res) => {
 })
 
 //LISTA APENAS 1 USUARIO
-router.get('/find', async (req, res) => {
+router.get('/find', async(req, res) => {
 
-    const  id = req;
+    const { id } = req.query
     try {
-        console.log(id)
         const userDb = await User.findById(id)
 
         if (userDb != null) {
